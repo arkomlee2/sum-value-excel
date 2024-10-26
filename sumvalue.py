@@ -2,6 +2,7 @@ import pandas as pd
 import itertools
 import streamlit as st
 from datetime import datetime
+import io
 
 # Set Streamlit page config
 st.set_page_config(
@@ -161,18 +162,18 @@ if uploaded_file:
                     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                     filename = f"sum_value_results_{timestamp}.xlsx"
                     
-                    # แปลง DataFrame เป็น Excel
-                    buffer = pd.ExcelWriter(filename, engine='xlsxwriter')
-                    export_df.to_excel(buffer, index=False)
-                    buffer.close()
+                    # สร้าง Excel file ในหน่วยความจำ
+                    buffer = io.BytesIO()
+                    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+                        export_df.to_excel(writer, index=False)
                     
-                    with open(filename, "rb") as f:
-                        st.download_button(
-                            label="📥 ดาวน์โหลดผลลัพธ์ (Excel)",
-                            data=f,
-                            file_name=filename,
-                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                        )
+                    # เตรียมไฟล์สำหรับดาวน์โหลด
+                    st.download_button(
+                        label="📥 ดาวน์โหลดผลลัพธ์ (Excel)",
+                        data=buffer.getvalue(),
+                        file_name=filename,
+                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    )
                         
     except Exception as e:
         st.error(f"❌ เกิดข้อผิดพลาด: {str(e)}")
