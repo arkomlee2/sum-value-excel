@@ -1,29 +1,3 @@
-# Web Application Framework
-streamlit
-
-# Data Processing
-pandas
-numpy
-
-# Excel File Handling
-openpyxl
-xlrd
-xlwt
-
-# Performance Optimization
-concurrent-futures>=3.0.5
-cProfile
-
-# Data Visualization
-matplotlib
-plotly
-
-# Progress Bars and Styling
-tqdm
-style
-# Debug and Profiling
-memory-profiler
-# Type Hints Support
-typing-extensions
-# Excel Support for Different Formats
-xlsxwriter
+pandas==2.2.0
+streamlit==1.31.0
+openpyxl==3.1.2
