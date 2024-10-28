@@ -74,7 +74,7 @@ with st.sidebar:
     max_items = st.number_input(
         "จำนวนสินค้าสูงสุดต่อชุด",
         min_value=2,
-        max_value=10,
+        max_value=500,
         value=5,
         help="จำกัดจำนวนสินค้าสูงสุดในแต่ละชุดเพื่อลดเวลาในการคำนวณ"
     )
